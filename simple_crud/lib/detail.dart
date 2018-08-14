@@ -27,7 +27,7 @@ class _DetailState extends State<Detail>{
     AlertDialog alertDialog = new AlertDialog(
       content: new Text("Are you sure want to delete '${widget.lists[widget.index]['notepad_title']}'"),
       actions: <Widget>[
-        new MaterialButton(onPressed: (){ deleteData(); Navigator.pop(context);},
+        new MaterialButton(onPressed: (){ deleteData(); Navigator.pop(context); Navigator.pop(context);},
           child: Text("Delete", style: new TextStyle(color: Colors.blueAccent),),),
         new MaterialButton(onPressed: ()=> Navigator.pop(context),
           child: Text("Cancel", style: new TextStyle(color: Colors.redAccent),),)
