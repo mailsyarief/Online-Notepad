@@ -120,7 +120,8 @@ class CreateNote extends StatelessWidget{
               child: new TextFormField(
                 controller: controllerTitle,
                 decoration: InputDecoration(
-                    labelText: 'Title'
+                    border: OutlineInputBorder(),
+                    hintText: "Title"
                 ),
               ),
             ),
@@ -131,7 +132,8 @@ class CreateNote extends StatelessWidget{
                 maxLines: 10,
                 controller: controllerNotes,
                 decoration: InputDecoration(
-                    hintText: 'Notes'
+                    border: OutlineInputBorder(),
+                    hintText: "Notes"
                 ),
               ),
             ),

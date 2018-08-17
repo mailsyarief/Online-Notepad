@@ -14,13 +14,11 @@ class Detail extends StatefulWidget{
 
 class _DetailState extends State<Detail>{
 
-
   void deleteData(){
     var url = "http://10.0.2.2/simple_crud_flutter_api/deleteData.php";
     http.post(url, body: {
       "notepad_id": widget.lists[widget.index]['notepad_id'],
     });
-
   }
 
   void confirm(){
