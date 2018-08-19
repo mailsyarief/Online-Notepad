@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'main.dart';
 
 
 
@@ -46,8 +47,9 @@ class EditDataState extends State<EditData>{
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           editData();
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
           Navigator.pop(context);
-          Navigator.pop(context);
+//          Navigator.pop(context);
         },
         child: new Icon(Icons.check),
       ),
