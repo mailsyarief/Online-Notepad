@@ -42,9 +42,12 @@ class _DetailState extends State<Detail>{
       appBar: AppBar(
         title: new Text("${widget.lists[widget.index]['notepad_title']}"),
         actions: <Widget>[new GestureDetector(
-          child: new Container(
-            margin: EdgeInsets.all(15.0),
-            child: new Icon(Icons.delete),
+          child: Hero(
+            tag: 'cardHero',
+            child: new Container(
+              margin: EdgeInsets.all(15.0),
+              child: new Icon(Icons.delete),
+            ),
           ),
           onTap: (){
             confirm();
