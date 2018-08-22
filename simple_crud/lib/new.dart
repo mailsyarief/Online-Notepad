@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'main.dart';
 
 class CreateNote extends StatelessWidget{
 
@@ -23,6 +24,7 @@ class CreateNote extends StatelessWidget{
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           addData();
+//          Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
           Navigator.pop(context);
         },
         child: new Icon(Icons.check),
@@ -34,6 +36,7 @@ class CreateNote extends StatelessWidget{
               margin: EdgeInsets.all(20.0),
               child: new TextFormField(
                 controller: controllerTitle,
+                validator: validateName,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Title"
@@ -57,4 +60,12 @@ class CreateNote extends StatelessWidget{
       ),
     );
   }
+}
+
+
+String validateName(String value) {
+  if (value.length < 3)
+    return 'Name must be more than 2 charater';
+  else
+    return null;
 }

@@ -2,13 +2,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'detail.dart';
 import 'new.dart';
+import 'edit.dart';
 
 void main() {
   runApp(new MaterialApp(
     title: 'Notepad Online',
-    home: new Home(),
+    initialRoute: '/',
+    routes: {
+      '/' : (context) => Home(),
+      '/new' : (context) => CreateNote(),
+    },
   ));
 }
 
@@ -30,11 +34,9 @@ class _HomeState extends State<Home> {
     return new Scaffold(
       appBar: new AppBar(title: Text("Notepad Online")),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            Navigator.of(context).push(new MaterialPageRoute(
-              builder: (BuildContext context) =>
-              new CreateNote(),
-            )),
+        onPressed: () {
+          Navigator.pushNamed(context, '/new');
+        },
         child: new Icon(Icons.add),
       ),
       body: new FutureBuilder<List>(
@@ -66,13 +68,14 @@ class ItemList extends StatelessWidget {
       itemCount: lists == null ? 0 : lists.length,
       itemBuilder: (context, i) {
         return new Container(
-          margin: EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
+          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
           child: new Card(
+            elevation: 3.0,
               child: new GestureDetector(
                 onTap: () =>
                     Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) =>
-                      new Detail(lists: lists, index: i),
+                      new EditData(lists: lists, index: i),
                     )),
                 child: new ListTile(
                   leading: Icon(Icons.note),
