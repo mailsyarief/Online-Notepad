@@ -24,6 +24,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
   Future<List> getData() async {
     final response = await http.get("http://10.0.2.2/simple_crud_flutter_api/getData.php");
     return json.decode(response.body);
@@ -58,33 +60,49 @@ class _HomeState extends State<Home> {
 }
 
 class ItemList extends StatelessWidget {
+
+  void deleteData(int id) {
+    var url = "http://10.0.2.2/simple_crud_flutter_api/deleteData.php";
+    http.post(url, body: {
+      "notepad_id": lists[id]['notepad_id'],
+    });
+  }
+
   final List lists;
 
   ItemList({this.lists});
 
   @override
   Widget build(BuildContext context) {
+
     return new ListView.builder(
       itemCount: lists == null ? 0 : lists.length,
       itemBuilder: (context, i) {
         return new Container(
           margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-          child: new Card(
-            elevation: 3.0,
-              child: new GestureDetector(
-                onTap: () =>
-                    Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                      new EditData(lists: lists, index: i),
-                    )),
-                child: new ListTile(
-                  leading: Icon(Icons.note),
-                  title: Text(lists[i]['notepad_title']),
-                  subtitle: Text(lists[i]['notepad_body'], maxLines: 1,),
-                ),
-              )),
+          child: Dismissible(
+            key: new UniqueKey(),
+            onDismissed: (direction) {
+              deleteData(i);
+            },
+            child: new Card(
+              elevation: 3.0,
+                child: new GestureDetector(
+                  onTap: () =>
+                      Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                        new EditData(lists: lists, index: i),
+                      )),
+                  child: new ListTile(
+                    leading: Icon(Icons.note),
+                    title: Text(lists[i]['notepad_title']),
+                    subtitle: Text(lists[i]['notepad_body'], maxLines: 1,),
+                  ),
+                )),
+          ),
         );
       },
+
     );
   }
 }

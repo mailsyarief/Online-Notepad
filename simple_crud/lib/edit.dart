@@ -18,47 +18,6 @@ class EditDataState extends State<EditData> {
   TextEditingController controllerTitle;
   TextEditingController controllerNotes;
 
-  void deleteData() {
-    var url = "http://10.0.2.2/simple_crud_flutter_api/deleteData.php";
-    http.post(url, body: {
-      "notepad_id": widget.lists[widget.index]['notepad_id'],
-    });
-  }
-
-  void _showDialog() {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Are You Sure?"),
-          content: new Text(
-              "Delete ${widget.lists[widget.index]['notepad_title']} ?"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            new FlatButton(
-              child: new Text(
-                "Delete",
-                style: TextStyle(color: Colors.redAccent),
-              ),
-              onPressed: () {
-                deleteData();
-                Navigator.of(context).pop();
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   void editData() {
     var url = "http://10.0.2.2/simple_crud_flutter_api/editData.php";
@@ -84,15 +43,6 @@ class EditDataState extends State<EditData> {
     return new Scaffold(
       appBar: AppBar(
         title: Text("Notepad Online"),
-        actions: <Widget>[
-          new GestureDetector(
-            child: new Container(
-              margin: EdgeInsets.all(15.0),
-              child: new Icon(Icons.delete),
-            ),
-            onTap: () => _showDialog(),
-          )
-        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
